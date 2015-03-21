@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Hello World!
-tagline: Supporting tagline
+title: Articles/Technical Guides/etc
+tagline: javascript rails ruby
 ---
 {% include JB/setup %}
 
