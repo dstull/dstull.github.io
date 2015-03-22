@@ -33,3 +33,22 @@ ____
 ###The JavaScript:
 
 {% gist 91513aaf4657fcf9a302 %}
+
+####Setup basic dataTable with search box (lines 15-25):
+  * lines 16-18: Setup the table and specifically set the sDom for length, information, and pagination excluding the filter(f) attribute.
+     * We could also not include the sDom setting and just hide the specific dataTables filter class.
+  * lines 19-21: Search the table on keyup from the searchbox id
+  * lines 22-24: Enable the popover tip functionality of bootstrap for our info button
+
+####Dropdown column switching (lines 6-14):
+- line 7: First clear the search filters
+- lines 8-9: Remove the active class from all and then apply it back to the one that was clicked on
+- lines 10-12: Find the selector button and replace the text of it with the current clicked on item.  Append back the caret.
+- lines 13: Clear out the search text box
+
+####Perform Search using dataTables API (lines 27-39):
+- line 28: Get the value of the active selection
+- lines 29-32: If the column index is Search All(-1), then perform the search against the whole table and redraw it.
+- lines 33-37: Else if a specific column is selected, perform a column search and redraw the table.
+- Note: We have set the options to true for the search in each case regex and smart search.
+   * More can be read on what these options mean [here](https://datatables.net/reference/api/search()).
