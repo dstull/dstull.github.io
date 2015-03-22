@@ -1,114 +1,35 @@
 ---
 layout: post
 title: "dataTables Column Search"
-description: ""
-category: 
-tags: []
+category: javascript
+tags: [javascript datatables rails tables]
 ---
-{% include JB/setup %}
+____
+[dataTables](https://www.datatables.net/) is a nifty jquery plugin for displaying large sets of data.  However, we need to do smarter column based searching.
+
+<!--more-->
 
 ###The Problem:
-- How, using [dataTables](https://www.datatables.net/), to create a singular search box that can search whole table and for a singular column
+- How, using [dataTables](https://www.datatables.net/), to create a singular search box that can search whole table and for a singular column.  Via leveraging of the [dataTables API](https://datatables.net/api), we are able to customize our own search/filter.  I believe this is far superior to the default search as it allows search by column without putting an ugly search box on each column.
 
 ###Framework:
-- [Rails 4.2.0](http://rubyonrails.org/) + [jquery dataTables](https://github.com/rweng/jquery-datatables-rails)
-  * We'll focus on dataTables here and skip the rails specifific tasks (creating app, model, controller, view, etc)
+- [Rails 4.2.0](http://rubyonrails.org/) + [jquery dataTables](https://github.com/rweng/jquery-datatables-rails) + [twitter bootstrap](https://github.com/seyhunak/twitter-bootstrap-rails)
+  * We will focus on dataTables here and skip the rails specifific tasks (creating app, model, controller, view, etc)
+  * This is a very simple rails app, built only to demonstrate in the simplest possible format the dataTables search
+     * source code for this blog can be found [here](https://github.com/dstull/dataTables-search).
 
 ###The HTML(ERB format):
 
-{% highlight ruby linenos %}
-<div class="page-header">
-  <h4>
-    <span>Cars</span>
-  </h4>
-</div>
-<div class="input-group input-group-sm col-lg-2 pull-right" id="car-search">
-  <div class="input-group-btn">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Search All 
-    	<span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" id="column_header" role="meanu">
-      <li value='-1' class="active"><%= link_to 'Search All','#' %></li>
-      <li value='0'><%= link_to 'Make','#' %></li>
-      <li value='1'><%= link_to 'Model','#' %></li>
-      <li value='2'><%= link_to 'Year','#' %></li>
-      <li value='3'><%= link_to 'Color','#' %></li>
-    </ul>
-  </div>
-  <%= text_field_tag 'search',nil, { class: 'form-control', id: 'searchbox'} %>
-  <span class="input-group-addon" id="search-info" data-container="body" data-toggle="popover" data-placement="top" data-trigger="focus" tabindex="0" data-content="search help info explaining how to smart search">
-  	<i class="glyphicon glyphicon-info-sign"></i>
-  </span>
-</div>
-<table class="datatables">
-  <thead>
-    <tr>
-      <th>Make</th>
-      <th>Model</th>
-      <th>Year</th>
-      <th>Color</th>
-    </tr>
-  </thead>
+{% gist 2026eda60e1229910139 %}
+ 
+####Custom SearchBox (lines 6-23):
+   * Setup the div leveraging bootstrap classes
+   * Due to styling issues with bootstrap dropdowns and addons, we will use a drop down menu here instead of select box
+   * We assign a value to each line element. **this is important** The values here will correspond to the column indexes that dataTables uses.
+      * dataTables starts at 0 and goes left to right in indexing the columns.  This is how we will determin which column to search if one is selected.
+   * The result here will be a drop down search menu with search box and info button for help instructions.
+   * Note the assigned id s on some of the elements.  These will be used when we write the javascript.
 
-  <tbody>
-    <% @cars.each do |car| %>
-      <tr>
-        <td><%= car.make %></td>
-        <td><%= car.model %></td>
-        <td><%= car.year %></td>
-        <td><%= car.color %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+###The JavaScript:
 
-<br>
-
-<%= link_to 'New Car', new_car_path %>
-{% endhighlight %}
-
-{% highlight js %}
-var Cars = {
-    init: function() {
-        Cars.setup_datatables();
-    },
-    setup_datatables: function() {
-        $(".dropdown-menu li").on("click", function() {
-            Cars.search_table('', oTable); //clear filters
-            $(this).parent().children('li').removeClass('active');
-            $(this).addClass('active');
-            $(this).parents(".input-group-btn").find('.btn').html(
-                $(this).text() + " <span class='caret'></span>"
-            );
-            $("#searchbox").val('');
-        });
-        if ($('.datatables').length) {
-            var oTable = $('.datatables').DataTable({
-                "sDom": '<"top"l>rt<"bottom"ip><"clear">' //this explicitely excludes the default search
-            });
-            $("#searchbox").keyup(function() {
-                Cars.search_table(this.value, oTable); //search column or whole table
-            });
-            $(function() {
-                $('#search-info').popover(); //popover tip
-            });
-        }
-    },
-    search_table: function(search_string, table) {
-        var column = $('#column_header').find(".active").val();
-        if (column == -1) {
-            table
-                .search(search_string, true, true)  //regex and smart search true
-                .draw();
-        } else {
-            table
-                .column(column)
-                .search(search_string, true, true)
-                .draw();
-        }
-    }
-};
-$(function() {
-    Cars.init();
-});
-{% endhighlight %}
+{% gist 91513aaf4657fcf9a302 %}
