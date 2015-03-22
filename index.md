@@ -1,7 +1,5 @@
 ---
 layout: page
-title: Articles/Technical Guides/etc
-tagline: javascript rails ruby
 ---
 {% include JB/setup %}
 
