@@ -18,7 +18,7 @@ ____
   * This is a very simple rails app, built only to demonstrate in the simplest possible format the dataTables search
      * source code for this blog can be found [here](https://github.com/dstull/dataTables-search).
 
-###The HTML(ERB format):
+###HTML(ERB format):
 
 {% gist 2026eda60e1229910139 %}
  
@@ -30,7 +30,7 @@ ____
    * The result here will be a drop down search menu with search box and info button for help instructions.
    * Note the assigned id s on some of the elements.  These will be used when we write the javascript.
 
-###The JavaScript:
+###JavaScript:
 
 {% gist 91513aaf4657fcf9a302 %}
 
@@ -52,3 +52,10 @@ ____
 - lines 33-37: Else if a specific column is selected, perform a column search and redraw the table.
 - Note: We have set the options to true for the search in each case regex and smart search.
    * More can be read on what these options mean [here](https://datatables.net/reference/api/search()).
+
+###CSS:
+
+{% gist 51c7e00b675bfad2d58b %}
+
+- Here we are simply aligning the dataTables length with our custom search box.  Effectivily putting our search box in the place where the default one was.
+   * Note: This is due to the dataTables dom setup.
