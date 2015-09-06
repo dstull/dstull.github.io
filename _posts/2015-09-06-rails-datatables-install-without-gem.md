@@ -24,9 +24,14 @@ ____
    * go to the images directory and copy all of those files to your app under vendor/assets/images
    * add the javascript libraries you want loaded to app/assets/javascripts/application.js like below (lines 16-17 - required, 18-20 extras):
 
-   {% gist 26dcfcaf1e935e93f473 %}
+{% gist 26dcfcaf1e935e93f473 %}
 
    * add the css files you want loaded to app/assets/stylesheets/application.css like below (lines 14-15 - required, 16-20 extras):
 
-   {% gist 4a228be56fd65b93b37e %}
+{% gist 4a228be56fd65b93b37e %}
+
+###Modification Steps
+   * comment out duplicate sorting images, when using bootstrap, in the vendor/assets/stylesheets/jquery.DataTables.css lines below:
+
+{% gist f1818d7e7b05600de4f2 %}
 
