@@ -1,6 +1,6 @@
 ---
 title: Jekyll Introduction Draft
-date: 2019-11-18 17:06:39.621000000 Z
+date: 2019-11-18 17:06:00 Z
 categories:
 - lessons
 tags:
@@ -8,11 +8,11 @@ tags:
 - beginner
 - jekyll
 - tutorial
-layout: post
 tagline: Supporting tagline
+layout: post
 ---
 
 {% include JB/setup %}
 
 
-This is an example of a draft. Read more here: [http://jekyllrb.com/docs/drafts/](http://jekyllrb.com/docs/drafts/)
+This is an example of a drafts. Read more here: [http://jekyllrb.com/docs/drafts/](http://jekyllrb.com/docs/drafts/)
