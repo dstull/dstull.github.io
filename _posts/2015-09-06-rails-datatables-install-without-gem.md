@@ -1,9 +1,13 @@
 ---
+title: rails dataTables install without gems
+date: 2015-09-06 00:00:00 Z
+categories:
+- javascript
+tags:
+- javascript datatables rails tables
 layout: post
-title: "rails dataTables install without gems"
-category: javascript
-tags: [javascript datatables rails tables]
 ---
+
 ____
 [jquery datatables rails](https://github.com/rweng/jquery-datatables-rails) is a gem that conveniently wraps the datatables library in a gem for rails.  However, using that gem adds an unnecessary layer between your app and datatables library.  This can mean you will have to wait for the gem to be updated to use latest datatables updates.
 

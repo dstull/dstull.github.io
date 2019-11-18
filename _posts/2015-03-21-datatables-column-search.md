@@ -1,9 +1,13 @@
 ---
+title: dataTables Column Search
+date: 2015-03-21 00:00:00 Z
+categories:
+- javascript
+tags:
+- javascript datatables rails tables
 layout: post
-title: "dataTables Column Search"
-category: javascript
-tags: [javascript datatables rails tables]
 ---
+
 ____
 [dataTables](https://www.datatables.net/) is a nifty jquery plugin for displaying large sets of data.  However, we need to do smarter column based searching.
 

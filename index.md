@@ -1,6 +1,6 @@
 ---
+title: dstull.github.io
 layout: default
-title: "dstull.github.io"
 ---
 
 <div id="main-content">
